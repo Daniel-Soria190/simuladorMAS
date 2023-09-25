@@ -22,7 +22,7 @@ def E(q, r0, x, y):
 
 # # puntos de los ejes x e y.
 
-nx, ny = 64, 64
+nx, ny = 128, 128
 
 x = np.linspace(-2, 2, nx)
 
