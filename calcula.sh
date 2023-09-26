@@ -1,0 +1,1 @@
+/home/daniel/anaconda3/envs/progra/bin/python /home/daniel/Escritorio/UASLP/Electricidad_y_magnetismo/proyecto/simulador.py

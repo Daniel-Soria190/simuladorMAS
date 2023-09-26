@@ -2,12 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 # import pandas as pd
 # Nota : la amplitud de be de ser menor a la distancia entre cargas
+
+datos = np.loadtxt('datos_java.csv',delimiter=',')
+
 k = 8.9876e9
-d = 1
-q_12 = 1.6e-19
-q_3 = -1.6e-19
-m = 1.67e-27
-amplitud = 0.1
+
+d = datos[0]                #var
+amplitud = datos[1]         #var
+m = datos[2]                #var
+q_12 = datos[3]             #var
+q_3 = -datos[3]             #var
 omega = 4*np.sqrt(np.absolute(k*q_12*q_3)/(m*(d**3)))
 periodo = (np.pi*np.sqrt(m*(d**3)))/(2*np.sqrt(np.absolute(k*q_12*q_3)))
 fps = 120
@@ -48,7 +52,7 @@ plt.ylabel('x')
 # grafica fuerza
 plt.figure()
 plt.grid()
-plt.plot(x,fuerza, label='$F(t)$')
+plt.plot(x,fuerza, label='$F(x)$')
 plt.legend(title='Fuerza')
 plt.xlabel('distancia')
 plt.ylabel('Newtons')

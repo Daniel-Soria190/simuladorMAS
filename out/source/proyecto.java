@@ -17,14 +17,72 @@ public class proyecto extends PApplet {
 
 // Variables
 // vectores de datos importados
-float[] x, velocidad, aceleracion, fuerza, labx, laby, ejex, ejey; ////
+float[] x, velocidad, aceleracion, fuerza, ejex, ejey;
 // magnitudes exportadas
 float distancia, amplitud, masa, carga, ancho, alto;
-
-
-
+PrintWriter output;
 
 int frame = 0; //<>//
+
+public void setup() {
+    /* size commented out by preprocessor */;
+    frameRate(120);
+    textSize(16);
+    distancia = 1;
+    amplitud = 0.1f;
+    masa = 1.67e-27f;
+    carga = 1.6e-19f;
+    ancho = (2*amplitud);
+    alto = (distancia);
+    escribeDatos();
+    delay(1000);
+    python();
+    delay(5000);
+    cargaDatos();
+    
+}
+
+public void draw() {
+    background(255, 255, 255);
+    dibujaEjes();
+    fill(0, 255, 255);
+    if (frame >= x.length) {
+        frame = 0;
+    }
+    circle(posX(x[frame]), posy(0), 15);
+    fill(255,0,0);
+    circle(posX(0), posy(-distancia/2),15);
+    circle(posX(0), posy(distancia/2),15);
+    fill(0,0,0);
+    text(str(-amplitud),15,20+ height/2);
+    text(str(amplitud),width-40,20+ height/2);
+    text(str(distancia/2),15 + width/2,15);
+    text(str(-distancia/2),15 + width/2,height-15);
+    fill(255,255,255);
+    rect(7*(width/10), 7*(height/10), 3*(width/10), 3*(height/10));
+    fill(0,0,0);
+    text("Fuerza = "+str(fuerza[frame]), 3*(width/4), 12*(height/16));
+    text("Posicion = "+str(x[frame]), 3*(width/4), 13*(height/16));
+    text("Velocidad = "+str(velocidad[frame]), 3*(width/4), 14*(height/16));
+    text("Aceleracion = "+str(aceleracion[frame]), 3*(width/4), 15*(height/16));
+    frame ++;
+}
+public void escribeDatos(){
+    output = createWriter("datos_java.csv");
+    output.print(distancia+","+amplitud+","+masa+","+carga);
+    output.flush();
+    output.close();
+
+}
+
+public void python(){
+    try {
+        String cmd = "./calcula.sh"; 
+        Runtime.getRuntime().exec(cmd); 
+    } catch (IOException ioe) {
+	    System.out.println (ioe);
+    }
+}
 
 public void cargaDatos(){
     String[] renglones = loadStrings("datos.csv");
@@ -43,26 +101,12 @@ public void cargaDatos(){
     }
 }
 
-// float posX(float _x){
-//     return(width/2 + 2*(width*_x));
-// }
-
 public float posX(float _x){
     return(((_x*width)/ancho)+(width/2));
 }
 
 public float posy(float _y){
     return(((_y*height)/alto)+(height/2));
-}
-
-public void calculaLabs(){
-    float espx, espy;
-    espx = amplitud/11;
-    espy = distancia/11;
-    for (int i = 0; i <= 10; ++i) {
-        labx[i] = (-amplitud)+(espx*i);
-        laby[i] = (-distancia/2)+(espy*i);
-    }
 }
 
 public void dibujaEjes(){
@@ -74,31 +118,6 @@ public void dibujaEjes(){
         line(i*espx, 0, i*espx, height);
         line(0, espy*i, width, espy*i);
     }
-}
-
-
-public void setup() {
-    /* size commented out by preprocessor */;
-    amplitud = 0.1f;
-    distancia = 1 ;
-    ancho = (2*amplitud);
-    alto = (distancia);
-    cargaDatos(); //<>//
-    frameRate(120);
-}
-
-public void draw() {
-    background(255, 255, 255); //<>//
-    dibujaEjes();
-    fill(0, 255, 255);
-    if (frame >= x.length) {
-        frame = 0;
-    }
-    circle(posX(x[frame]), posy(0), 15);
-    fill(255,0,0);
-    circle(posX(0), posy(-distancia/2),15);
-    circle(posX(0), posy(distancia/2),15);
-    frame ++;
 }
 
 
