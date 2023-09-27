@@ -6,6 +6,51 @@ void escribeDatos(){
 
 }
 
+void actualizaBasico(){
+    noLoop();
+    distancia = gui.slider("basico/distancia");
+    amplitud = gui.slider("basico/amplitud");
+    if (amplitud>distancia) {
+        loop();
+        fill(255,0,0);
+        text("La amplitud no puede ser mayor a la distancia", width/2,height/2);
+        noLoop();
+    }else {
+    ancho = (2*amplitud);
+    alto = (distancia);
+    escribeDatos();
+    delay(1000);
+    python();
+    delay(3000);
+    cargaDatos();
+    loop();
+    }
+}
+
+void actualizaAvanzado(){
+    noLoop();
+    distancia = gui.slider("avanzado/distancia");
+    amplitud = gui.slider("avanzado/amplitud");
+    if (amplitud>distancia) {
+        loop();
+        fill(255,0,0);
+        text("La amplitud no puede ser mayor a la distancia", width/2,height/2);
+        noLoop();
+    }else {
+    ancho = (2*amplitud);
+    alto = (distancia);
+    masa = gui.slider("avanzado/masa");
+    carga = gui.slider("avanzado/carga");
+    escribeDatos();
+    delay(1000);
+    python();
+    delay(3000);
+    cargaDatos();
+    loop();
+    }
+}
+
+
 void python(){
     try {
         String cmd = "./calcula.sh"; 

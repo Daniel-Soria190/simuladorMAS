@@ -1,3 +1,6 @@
+import com.krab.lazy.*;
+
+LazyGui gui;
 // Variables
 // vectores de datos importados
 float[] x, velocidad, aceleracion, fuerza, ejex, ejey;
@@ -8,8 +11,15 @@ PrintWriter output;
 int frame = 0; //<>//
 
 void setup() {
-    size(1024, 1024);
+    size(1024, 1024, P2D);
     frameRate(120);
+    gui = new LazyGui(this);
+    gui.slider("basico/distancia");
+    gui.slider("basico/amplitud");
+    gui.slider("avanzado/distancia");
+    gui.slider("avanzado/amplitud");
+    gui.slider("avanzado/masa");
+    gui.slider("avanzado/carga");
     textSize(16);
     distancia = 1;
     amplitud = 0.1;
@@ -20,9 +30,8 @@ void setup() {
     escribeDatos();
     delay(1000);
     python();
-    delay(5000);
-    cargaDatos();
-    
+    delay(3000);
+    cargaDatos();   
 }
 
 void draw() {
@@ -48,5 +57,13 @@ void draw() {
     text("Posicion = "+str(x[frame]), 3*(width/4), 13*(height/16));
     text("Velocidad = "+str(velocidad[frame]), 3*(width/4), 14*(height/16));
     text("Aceleracion = "+str(aceleracion[frame]), 3*(width/4), 15*(height/16));
+
+    if(gui.button("basico/Aplicar")){
+      actualizaBasico();
+    }
+    if(gui.button("avanzado/Aplicar")){
+      actualizaAvanzado();
+    }
+
     frame ++;
 }
