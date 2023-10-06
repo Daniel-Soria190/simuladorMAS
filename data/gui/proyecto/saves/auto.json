@@ -813,7 +813,7 @@
     {
       "children": [
         {
-          "valueFloat": 0.99999547,
+          "valueFloat": 0.30039608,
           "currentPrecisionIndex": 2,
           "valueFloatPrecision": 0.01,
           "className": "SliderNode",
@@ -821,7 +821,7 @@
           "type": "VALUE"
         },
         {
-          "valueFloat": 0.48000062,
+          "valueFloat": 0.10000078,
           "currentPrecisionIndex": 2,
           "valueFloatPrecision": 0.01,
           "className": "SliderNode",
@@ -834,6 +834,12 @@
           "type": "TRANSIENT"
         }
       ],
+      "window": {
+        "posX": 176.0,
+        "posY": 22.0,
+        "closed": false,
+        "windowSizeX": 132.0
+      },
       "className": "FolderNode",
       "path": "basico",
       "type": "FOLDER"

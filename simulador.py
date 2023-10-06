@@ -17,6 +17,8 @@ periodo = (np.pi*np.sqrt(m*(d**3)))/(2*np.sqrt(np.absolute(k*q_12*q_3)))
 fps = 120
 intervalo = 1/fps
 
+fuerza_dis = lambda x: ((-16*k*q_12*q_3)/(d**3))*x
+
 # Posicion con respecto al tiempo
 pos = lambda t: amplitud*np.cos(omega*t)
 
@@ -47,15 +49,26 @@ plt.plot(tiempo,aceleracion, label='$a(t)$')
 plt.legend(title='Funciones')
 plt.xlabel('t')
 plt.ylabel('x')
-# plt.show()
+plt.show()
 
 # grafica fuerza
 plt.figure()
 plt.grid()
-plt.plot(x,fuerza, label='$F(x)$')
+plt.plot(x,fuerza_dis(x), label='$F(x)$')
 plt.legend(title='Fuerza')
 plt.xlabel('distancia')
 plt.ylabel('Newtons')
+#plt.savefig("fuerza_x.png", dpi=600)
+plt.show()
+
+# grafica fuerza
+plt.figure()
+plt.grid()
+plt.plot(tiempo,fuerza, label='$F(t)$')
+plt.legend(title='Fuerza')
+plt.xlabel('Tiempo')
+plt.ylabel('Newtons')
+#plt.savefig("fuerza_t.png", dpi=600)
 plt.show()
 
 # # grafica animada
